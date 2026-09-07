@@ -352,3 +352,22 @@ function AdminNewProductPage() {
     </div>
   );
 }
+
+function App() {
+  const path = window.location.pathname;
+
+  // Vi tittar på URL:en och bestämmer vilken sida som ska visas.
+  if (path === "/") return <HomePage />;
+  if (path === "/search") return <SearchPage />;
+  if (path === "/admin/products") return <AdminProductsPage />;
+  if (path === "/admin/products/new") return <AdminNewProductPage />;
+
+  if (path.startsWith("/products/")) {
+    const slug = path.split("/")[2];
+    return <ProductPage slug={slug} />;
+  }
+
+  return <Layout><h2>Sidan hittades inte</h2></Layout>;
+}
+
+export default App;
