@@ -48,3 +48,27 @@ app.get("/api/products", (req, res) => {
     res.json(products);
   });
 });
+
+
+// Sök efter produkter med namn.
+app.get("/api/search", (req, res) => {
+  const search = req.query.q || "";
+
+  db.all(
+    "SELECT * FROM products WHERE name LIKE ? ORDER BY id",
+    ["%" + search + "%"],
+    (err, products) => {
+      if (err) {
+        res.status(500).json({ error: "Något gick fel" });
+        return;
+      }
+
+      res.json(products);
+    }
+  );
+});
+
+// Hämta en produkt med slug från URL:en.
+app.get("/api/products/slug/:slug", (req, res) => {
+  // Hämta slug från URL:en.
+  const slug = req.params.slug;
