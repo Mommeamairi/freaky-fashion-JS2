@@ -194,3 +194,64 @@ function SearchPage() {
     </Layout>
   );
 }
+
+function ProductPage({ slug }) {
+  const [product, setProduct] = useState(null);
+  const [similar, setSimilar] = useState([]);
+
+  useEffect(() => {
+    // Hämta produkten som hör till slugen i URL:en.
+    fetch(API + "/api/products/slug/" + slug)
+      .then((response) => response.json())
+      .then((data) => setProduct(data));
+
+    // Hämta alla produkter och välj tre andra som liknande produkter.
+    fetch(API + "/api/products")
+      .then((response) => response.json())
+      .then((data) => {
+        const others = data.filter((item) => item.slug !== slug);
+        setSimilar(others.slice(0, 3));
+      });
+  }, [slug]);
+
+  if (!product) {
+    return <Layout><p>Laddar produkt...</p></Layout>;
+  }
+
+  return (
+    <Layout>
+      <section className="productDetail">
+        <div className="detailImageWrap">
+          <img src={product.image || fallbackImage} alt={product.name} />
+          <button className="heartButton detailHeart">♡</button>
+        </div>
+
+        <div className="detailText">
+          <h1>{product.name}</h1>
+          <small>{product.brand}</small>
+          <p>{product.description}</p>
+          <p className="detailPrice">{product.price} SEK</p>
+          <button className="cartButton">Lägg i varukorg</button>
+        </div>
+      </section>
+
+      <h2 className="similarTitle">Liknande produkter</h2>
+      <section className="similarGrid">
+        {similar.map((item) => (
+          <ProductCard key={item.id} product={item} />
+        ))}
+      </section>
+    </Layout>
+  );
+}
+
+function AdminHeader() {
+  return (
+    <header className="adminHeader">
+      <h1>Administration</h1>
+      <nav>
+        <button onClick={() => goTo("/admin/products")}>Produkter</button>
+      </nav>
+    </header>
+  );
+}
