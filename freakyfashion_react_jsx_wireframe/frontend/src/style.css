@@ -1,0 +1,629 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #111;
+  background: white;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* ---------------- HEADER ---------------- */
+.siteHeader {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 18px 24px 8px;
+}
+
+.headerRow {
+  display: grid;
+  grid-template-columns: 260px minmax(220px, 430px) 1fr;
+  gap: 24px;
+  align-items: center;
+}
+
+.logo {
+  height: 82px;
+  border: 1px solid #222;
+  background: #f4f4f4;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.searchForm input {
+  width: 100%;
+  border: 1px solid #333;
+  border-radius: 18px;
+  padding: 8px 14px;
+}
+
+.headerIcons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 22px;
+}
+
+.mainNav {
+  margin-left: 284px;
+  margin-top: 8px;
+  display: flex;
+  gap: 18px;
+  font-size: 14px;
+}
+
+.mainNav a {
+  color: #111;
+  text-decoration: none;
+}
+
+/* ---------------- NORMALA SIDOR ---------------- */
+.pageContent {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px 24px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1.55fr;
+  border: 1px solid #222;
+  min-height: 380px;
+}
+
+.heroText {
+  padding: 55px 42px;
+}
+
+.heroText h1 {
+  margin-top: 0;
+  font-size: 34px;
+  font-weight: 500;
+}
+
+.heroText p {
+  line-height: 1.55;
+}
+
+.hero img {
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  object-fit: cover;
+}
+
+.spots {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin: 22px 0 38px;
+}
+
+.spots div {
+  position: relative;
+  border: 1px solid #222;
+}
+
+.spots img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  display: block;
+}
+
+.spots span {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 21px;
+  font-weight: bold;
+  text-shadow: 0 0 8px white;
+}
+
+.sectionTitle,
+.searchTitle,
+.similarTitle {
+  text-align: center;
+  margin: 28px 0 24px;
+}
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.productCard {
+  cursor: pointer;
+}
+
+.productImageWrap {
+  position: relative;
+  border: 1px solid #222;
+  overflow: hidden;
+}
+
+.productImageWrap img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  display: block;
+  object-fit: cover;
+}
+
+.heartButton {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  font-size: 30px;
+  line-height: 1;
+}
+
+.productInfo {
+  padding-top: 8px;
+}
+
+.productNamePrice {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.productInfo small {
+  display: block;
+  margin-top: 5px;
+  color: #555;
+}
+
+/* ---------------- FÖRDELAR + FOOTER ---------------- */
+.benefits {
+  max-width: 1400px;
+  margin: 42px auto 0;
+  padding: 20px 24px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.benefits > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.benefitIcon {
+  font-size: 30px;
+}
+
+.siteFooter {
+  border-top: 1px solid #222;
+  background: #eee;
+  padding: 22px 24px 30px;
+}
+
+.footerColumns {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 220px 220px 220px;
+  gap: 30px;
+}
+
+.footerGroup {
+  border: 0;
+}
+
+.footerGroup summary {
+  list-style: none;
+  font-weight: bold;
+  margin-bottom: 10px;
+  cursor: default;
+}
+
+.footerGroup summary::-webkit-details-marker {
+  display: none;
+}
+
+.footerGroup p {
+  margin: 6px 0;
+  font-size: 13px;
+}
+
+.copyright {
+  text-align: center;
+  margin: 25px 0 0;
+  font-size: 12px;
+}
+
+/* ---------------- PRODUKTDETALJ ---------------- */
+.productDetail {
+  display: grid;
+  grid-template-columns: minmax(300px, 520px) 1fr;
+  gap: 38px;
+  align-items: start;
+}
+
+.detailImageWrap {
+  position: relative;
+  border: 1px solid #222;
+}
+
+.detailImageWrap img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  display: block;
+}
+
+.detailHeart {
+  bottom: 12px;
+  right: 12px;
+}
+
+.detailText {
+  max-width: 540px;
+}
+
+.detailText h1 {
+  margin: 0 0 6px;
+  font-size: 26px;
+  font-weight: 500;
+}
+
+.detailText p {
+  line-height: 1.5;
+}
+
+.detailPrice {
+  margin-top: 25px;
+}
+
+.cartButton {
+  border: 1px solid #222;
+  background: white;
+  padding: 10px 18px;
+}
+
+.similarGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.similarTitle {
+  margin-top: 60px;
+}
+
+/* ---------------- ADMIN ---------------- */
+.adminPage {
+  min-height: 100vh;
+  background: white;
+}
+
+.adminHeader {
+  background: #202020;
+  color: white;
+  padding: 20px 32px 0;
+}
+
+.adminHeader h1 {
+  margin: 0 0 22px;
+  font-size: 28px;
+}
+
+.adminHeader nav {
+  border-top: 1px solid #555;
+}
+
+.adminHeader button {
+  border: 0;
+  background: transparent;
+  color: white;
+  padding: 14px 0;
+}
+
+.adminContent {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 38px 28px;
+}
+
+.adminTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.adminTitleRow button,
+.adminForm button {
+  border: 1px solid #222;
+  background: white;
+  padding: 9px 18px;
+}
+
+.tableWrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th,
+td {
+  border: 1px solid #777;
+  padding: 10px 12px;
+  text-align: left;
+}
+
+th {
+  background: #eee;
+}
+
+.adminForm {
+  display: grid;
+  gap: 17px;
+  max-width: 560px;
+}
+
+.adminForm label {
+  display: grid;
+  gap: 6px;
+}
+
+.adminForm input,
+.adminForm textarea {
+  border: 1px solid #444;
+  padding: 9px;
+}
+
+.adminForm button {
+  width: fit-content;
+}
+
+.formMessage {
+  color: #9b0000;
+}
+
+/* ==================================================
+   TABLET: från 640px till 1023px
+   ================================================== */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .siteHeader,
+  .pageContent,
+  .benefits {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .headerRow {
+    grid-template-columns: 220px 1fr auto;
+    gap: 16px;
+  }
+
+  .logo {
+    height: 72px;
+    font-size: 20px;
+  }
+
+  .mainNav {
+    margin-left: 236px;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .heroText {
+    order: 2;
+    text-align: center;
+    padding: 28px 40px;
+  }
+
+  .hero img {
+    order: 1;
+    min-height: 300px;
+    max-height: 360px;
+  }
+
+  .spots {
+    display: none;
+  }
+
+  .productGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .benefits {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .productDetail {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .similarGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ==================================================
+   MOBIL: under 640px
+   ================================================== */
+@media (max-width: 639px) {
+  .siteHeader {
+    padding: 10px;
+  }
+
+  .headerRow {
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+  }
+
+  .logo {
+    grid-column: 1 / -1;
+    width: 100%;
+    height: 105px;
+    font-size: 24px;
+  }
+
+  .searchForm {
+    min-width: 0;
+  }
+
+  .headerIcons {
+    gap: 10px;
+  }
+
+  .mainNav {
+    margin: 10px 0 0;
+    display: grid;
+    gap: 3px;
+    font-size: 13px;
+  }
+
+  .pageContent {
+    padding: 12px 10px;
+  }
+
+  .hero {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .hero img {
+    order: 1;
+    min-height: 0;
+    height: 300px;
+  }
+
+  .heroText {
+    order: 2;
+    padding: 24px 18px;
+    text-align: center;
+  }
+
+  .heroText h1 {
+    font-size: 25px;
+  }
+
+  .spots {
+    display: none;
+  }
+
+  .sectionTitle {
+    text-align: left;
+    margin: 22px 0 12px;
+  }
+
+  .productGrid,
+  .searchGrid,
+  .similarGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .productCard {
+    width: 100%;
+  }
+
+  .productNamePrice {
+    font-size: 15px;
+  }
+
+  .benefits {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 18px 12px;
+    margin-top: 25px;
+  }
+
+  .benefits > div {
+    min-height: 42px;
+  }
+
+  .siteFooter {
+    padding: 0 10px 18px;
+    background: white;
+  }
+
+  .footerColumns {
+    display: block;
+  }
+
+  .footerGroup {
+    border-bottom: 1px solid #222;
+    padding: 0;
+  }
+
+  .footerGroup summary {
+    margin: 0;
+    padding: 10px 2px;
+    cursor: pointer;
+  }
+
+  .footerGroup summary::after {
+    content: "+";
+    float: right;
+  }
+
+  .footerGroup[open] summary::after {
+    content: "−";
+  }
+
+  .footerGroupContent {
+    padding: 0 2px 9px;
+  }
+
+  .productDetail {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .detailText h1 {
+    font-size: 24px;
+  }
+
+  .cartButton {
+    width: 100%;
+  }
+
+  .similarTitle {
+    text-align: left;
+    margin-top: 35px;
+  }
+
+  .adminHeader {
+    padding: 18px 15px 0;
+  }
+
+  .adminContent {
+    padding: 25px 12px;
+  }
+
+  .adminTitleRow {
+    align-items: flex-end;
+  }
+}
