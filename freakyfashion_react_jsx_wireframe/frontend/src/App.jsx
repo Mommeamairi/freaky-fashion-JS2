@@ -255,3 +255,100 @@ function AdminHeader() {
     </header>
   );
 }
+
+function AdminProductsPage() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch(API + "/api/products")
+      .then((response) => response.json())
+      .then((data) => setProducts(data));
+  }, []);
+
+  return (
+    <div className="adminPage">
+      <AdminHeader />
+      <main className="adminContent">
+        <div className="adminTitleRow">
+          <h2>Produkter</h2>
+          <button onClick={() => goTo("/admin/products/new")}>Ny produkt</button>
+        </div>
+
+        <div className="tableWrap">
+          <table>
+            <thead>
+              <tr><th>Namn</th><th>SKU</th><th>Pris</th></tr>
+            </thead>
+            <tbody>
+              {products.map((product) => (
+                <tr key={product.id}>
+                  <td>{product.name}</td>
+                  <td>{product.sku}</td>
+                  <td>{product.price}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  );
+}
+
+function AdminNewProductPage() {
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [sku, setSku] = useState("");
+  const [image, setImage] = useState("");
+  const [price, setPrice] = useState("");
+  const [brand, setBrand] = useState("");
+  const [message, setMessage] = useState("");
+
+  function saveProduct(e) {
+    e.preventDefault();
+
+    const product = {
+      name: name,
+      description: description,
+      sku: sku,
+      image: image,
+      price: price,
+      brand: brand,
+    };
+
+    fetch(API + "/api/products", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(product),
+    })
+      .then((response) => {
+        if (response.ok) {
+          goTo("/admin/products");
+        } else {
+          setMessage("Kunde inte spara produkten.");
+        }
+      })
+      .catch(() => setMessage("Backend verkar inte vara igång."));
+  }
+
+  return (
+    <div className="adminPage">
+      <AdminHeader />
+      <main className="adminContent">
+        <h2>Ny produkt</h2>
+
+        <form className="adminForm" onSubmit={saveProduct}>
+          <label>Namn<input value={name} onChange={(e) => setName(e.target.value)} required /></label>
+          <label>Beskrivning<textarea value={description} onChange={(e) => setDescription(e.target.value)} rows="5" /></label>
+          <label>SKU<input value={sku} onChange={(e) => setSku(e.target.value)} required /></label>
+          <label>Bild<input value={image} onChange={(e) => setImage(e.target.value)} placeholder="URL till bild" /></label>
+          <label>Pris<input type="number" value={price} onChange={(e) => setPrice(e.target.value)} required /></label>
+          <label>Märke<input value={brand} onChange={(e) => setBrand(e.target.value)} /></label>
+
+          {message && <p className="formMessage">{message}</p>}
+          <button type="submit">Lägg till</button>
+        </form>
+      </main>
+    </div>
+  );
+}
