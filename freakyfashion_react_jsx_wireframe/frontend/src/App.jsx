@@ -121,3 +121,76 @@ function Footer() {
     </>
   );
 }
+
+
+// Header och footer används på alla vanliga sidor.
+function Layout({ children }) {
+  return (
+    <>
+      <Header />
+      <main className="pageContent">{children}</main>
+      <Footer />
+    </>
+  );
+}
+
+function HomePage() {
+  const [products, setProducts] = useState([]);
+
+  // När sidan öppnas hämtar vi produkter från backend.
+  useEffect(() => {
+    fetch(API + "/api/products")
+      .then((response) => response.json())
+      .then((data) => setProducts(data.slice(0, 8)));
+  }, []);
+
+  return (
+    <Layout>
+      <section className="hero">
+        <div className="heroText">
+          <h1>senaste tröja</h1>
+          <p>senaste tröja</p>
+        </div>
+        <img
+          src="https://static.nike.com/a/images/t_web_pdp_535_v2/f_auto,u_9ddf04c7-2a9a-4d76-add1-d15af8f0263d,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/b3699a23-fcf1-4976-be62-fb8f33c27b1f/U+NSW+TEE+LSE+REFLECTIVE+SHOX.png"
+          alt="Mode"
+        />
+      </section>
+
+      <section className="spots">
+        <div><img src="https://images.pexels.com/photos/18838613/pexels-photo-18838613.jpeg" alt="Ytter" /><span>ytter</span></div>
+        <div><img src="https://images.pexels.com/photos/5158837/pexels-photo-5158837.jpeg" alt="Inner" /><span>inner</span></div>
+        <div><img src="https://images.pexels.com/photos/37510228/pexels-photo-37510228.jpeg" alt="Skor" /><span>skor</span></div>
+      </section>
+
+      <h2 className="sectionTitle">Populära Produkter</h2>
+      <section className="productGrid">
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </section>
+    </Layout>
+  );
+}
+
+function SearchPage() {
+  const q = new URLSearchParams(window.location.search).get("q") || "";
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch(API + "/api/search?q=" + encodeURIComponent(q))
+      .then((response) => response.json())
+      .then((data) => setProducts(data));
+  }, [q]);
+
+  return (
+    <Layout>
+      <h2 className="searchTitle">Hittade {products.length} produkter</h2>
+      <section className="productGrid searchGrid">
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </section>
+    </Layout>
+  );
+}
