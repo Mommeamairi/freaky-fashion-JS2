@@ -57,3 +57,67 @@ function Header() {
     </header>
   );
 }
+
+// En produktkort som används på startsidan och söksidan. 
+function ProductCard({ product }) {
+  return (
+    <article className="productCard" onClick={() => goTo("/products/" + product.slug)}>
+      <div className="productImageWrap">
+        <img src={product.image || fallbackImage} alt={product.name} />
+        <button className="heartButton" onClick={(e) => e.stopPropagation()}>♡</button>
+      </div>
+
+      <div className="productInfo">
+        <div className="productNamePrice">
+          <span>{product.name}</span>
+          <span>{product.price} SEK</span>
+        </div>
+        <small>{product.brand}</small>
+      </div>
+    </article>
+  );
+}
+
+function Footer() {
+  return (
+    <>
+      <section className="benefits">
+        <div><span className="benefitIcon">❤️</span>Gratis frakt och returer</div>
+        <div><span className="benefitIcon">❤️</span>Expressfrakt</div>
+        <div><span className="benefitIcon">❤️</span>Säkra betalningar</div>
+        <div><span className="benefitIcon">❤️</span>Nyheter varje dag</div>
+      </section>
+
+      <footer className="siteFooter">
+        <div className="footerColumns">
+          <details className="footerGroup" open>
+            <summary>Shopping</summary>
+            <div className="footerGroupContent">
+              <p>Vinterjackor</p>
+              <p>Pufferjackor</p>
+              <p>Kappa</p>
+              <p>Trenchcoats</p>
+            </div>
+          </details>
+
+          <details className="footerGroup" open>
+            <summary>Mina Sidor</summary>
+            <div className="footerGroupContent">
+              <p>Mina Ordrar</p>
+              <p>Mitt Konto</p>
+            </div>
+          </details>
+
+          <details className="footerGroup" open>
+            <summary>Kundtjänst</summary>
+            <div className="footerGroupContent">
+              <p>Returnpolicy</p>
+              <p>Integritetspolicy</p>
+            </div>
+          </details>
+        </div>
+        <p className="copyright"> Freaky Fashion</p>
+      </footer>
+    </>
+  );
+}
