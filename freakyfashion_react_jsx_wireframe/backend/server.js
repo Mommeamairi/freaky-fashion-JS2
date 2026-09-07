@@ -72,3 +72,65 @@ app.get("/api/search", (req, res) => {
 app.get("/api/products/slug/:slug", (req, res) => {
   // Hämta slug från URL:en.
   const slug = req.params.slug;
+
+  
+ // Hämta produkten med det angivna slug från databasen.
+  db.get("SELECT * FROM products WHERE slug = ?", [slug], (err, product) => {
+    if (err) {
+      res.status(500).json({ error: "Något gick fel" });
+      return;
+    }
+
+    if (!product) {
+      res.status(404).json({ error: "Produkten hittades inte" });
+      return;
+    }
+
+    res.json(product);
+  });
+});
+
+// Lägg till en ny produkt.
+app.post("/api/products", (req, res) => {
+  const name = req.body.name;
+  const brand = req.body.brand;
+  const price = req.body.price;
+  const image = req.body.image;
+  const description = req.body.description;
+  const sku = req.body.sku;
+
+  if (!name || !sku || !price) {
+    res.status(400).json({ error: "Namn, SKU och pris måste fyllas i" });
+    return;
+  }
+
+  const slug = makeSlug(name);
+
+  const sql = `
+    INSERT INTO products (name, brand, price, image, description, sku, slug)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
+  `;
+
+  db.run(
+    sql,
+    [name, brand, price, image, description, sku, slug],
+    function (err) {
+      if (err) {
+        res.status(500).json({ error: "Kunde inte spara produkten" });
+        return;
+      }
+
+      res.status(201).json({ id: this.lastID });
+    }
+  );
+});
+
+
+
+
+
+
+
+app.listen(PORT, () => {
+  console.log("Backend kör på http://localhost:" + PORT);
+});
